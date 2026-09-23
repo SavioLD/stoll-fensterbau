@@ -1,0 +1,40 @@
+BILDMATERIAL FÜR DIE KARRIERESEITE
+==================================
+
+Alle Dateien einfach in diesen Ordner (bilder/) hochladen. Die Seite erkennt
+sie automatisch – ist eine Datei nicht da, bleibt der Farbverlauf bzw. der
+Text-Schriftzug stehen. Es geht also nichts kaputt, wenn etwas fehlt.
+
+
+1) LOGO  (wichtig – ersetzt den "STOLL"-Schriftzug)
+---------------------------------------------------
+   logo.svg          oder  logo.png     → Header (auf Weiß)
+   logo-weiss.svg    oder  logo-weiss.png → Hero + Footer (auf Dunkelgrün)
+
+   • SVG ist am besten. PNG bitte mit transparentem Hintergrund,
+     mind. 600 px breit.
+   • Gibt es keine weiße Variante, wird automatisch das normale Logo genutzt.
+
+
+2) HERO-BILD  (großes Bild ganz oben)
+--------------------------------------
+   hero.jpg   (alternativ hero.webp / hero.png)
+
+   • Querformat, mind. 1600 px breit, gern 2000 px.
+   • Motiv bitte RECHTS platzieren – links liegt die Textfläche.
+   • Gut geeignet: Monteur bei der Fenstermontage, Team vor dem Betrieb,
+     Werkstatt, Ausstellung.
+
+
+3) FÜR DIE META-ADS-CREATIVES (Schritt 2)
+------------------------------------------
+   Einfach alle brauchbaren Fotos hier ablegen, Dateinamen egal.
+   Ideal sind 5–15 Bilder, z. B.:
+
+   • Monteure bei der Arbeit (Fenster/Tür einsetzen, Beschlag einstellen)
+   • Team-/Gruppenfoto, einzelne Mitarbeiter mit Werkzeug
+   • Firmengebäude, Ausstellung, Werkstatt, Fuhrpark/Firmenwagen
+   • Fertige Objekte (Fenster, Haustüren, Wintergarten)
+
+   Je höher aufgelöst, desto besser (Handyfotos sind völlig okay).
+   Hochformat-Aufnahmen sind für die 9:16-Story-Formate besonders nützlich.
