@@ -33,15 +33,34 @@ Ablauf → Mid-CTA → Bewerbungsformular → FAQ → Footer.
 
 ## CI
 
+Ankerfarbe ist das Türkis aus dem Logo (`Logo-Fensterbau-Stoll_web.png`).
+
 | | |
 |---|---|
-| Primärfarbe | `#29615a` (aus der Stoll-Karriereseite entnommen) |
-| Abstufungen | `#123832` · `#23564f` · `#1c4741` · `#e8f1ef` |
-| Akzent hell | `#7fd0bf` |
+| Logo-Türkis (Akzent) | `#00998a` |
+| Primärfarbe (Buttons, Links) | `#00796d` – abgedunkelt, 4,9:1 auf Weiß (WCAG AA) |
+| Dunkle Flächen | `#0d3c37` · `#0a5f57` · `#00625a` |
+| Hell | `#e2f4f1` · Akzent auf Dunkel `#5fd6c6` |
 | Schrift | Poppins (Google Fonts) – geometrische Grotesk als Entsprechung zur Website-Schrift |
 
-Logo: wird automatisch geladen, sobald es in `bilder/` liegt. Bis dahin steht
-dort der Schriftzug **STOLL · FENSTERBAU · SEIT 1971**.
+Das reine Logo-Türkis erreicht auf Weiß nur 3,5:1 und ist deshalb dem Akzent
+vorbehalten (Verlauf, Fortschrittsbalken, Hero-Punkt); alles, was Text trägt,
+nutzt die abgedunkelte Variante.
+
+## Bilder
+
+Eingehängt in `index.html`:
+
+- **Logo** – `bilder/Logo-Fensterbau-Stoll_web.png` in Header, Hero und Footer.
+  Liegt eine Negativ-Variante als `bilder/logo-weiss.png` (oder `.svg`) im Ordner,
+  wird sie auf den dunklen Flächen automatisch bevorzugt.
+- **Hero** – `bilder/27 - Stoll Fensterbau-27.jpg` (Montage einer Schiebetür im
+  Neubau). Zum Tauschen den ersten Eintrag in der Liste `cands` im Script
+  ändern; als Alternativen sind Foto 38 und 9 bereits hinterlegt. Leerzeichen
+  im Dateinamen als `%20` schreiben. Liegt eine Datei `bilder/hero.jpg` im
+  Ordner, gewinnt immer diese.
+
+Die übrigen Fotos (4, 9, 18, 21, 38) sind für die Meta-Ads-Creatives reserviert.
 
 ## Vorfilterung im Formular
 
