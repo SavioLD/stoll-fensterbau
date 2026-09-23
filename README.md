@@ -71,7 +71,7 @@ Sechs Schritte: fünf Screening-Fragen (je eine pro Schritt) plus Kontaktdaten.
 | 1 | Qualifikation / Ausbildung | **Pflicht** | „Weder noch“ |
 | 2 | Führerschein Klasse B | **Pflicht** | „Nein, keinen Führerschein“ |
 | 3 | Deutschkenntnisse (Kundenkontakt) | **Pflicht** | „Kaum / keine“ |
-| 4 | Smarthome-/Technikerfahrung | optional | – |
+| 4 | Staplerschein | optional | – |
 | 5 | Verfügbarkeit | optional | – |
 
 - **Pflichtfrage nicht erfüllt** → Bewerbung endet sofort mit einem freundlichen
@@ -84,6 +84,18 @@ Sechs Schritte: fünf Screening-Fragen (je eine pro Schritt) plus Kontaktdaten.
 
 Fragen und Logik stehen gebündelt im Objekt `SCREENING` in `index.html` und
 lassen sich dort anpassen, ohne das Markup anzufassen.
+
+## Benefits
+
+Kommuniziert werden (Stand Onboarding):
+
+übertarifliche, leistungsgerechte Bezahlung · 14 € Spesen netto pro Arbeitstag ·
+50 € netto extra im Monat · Anwesenheitsprämie · Weihnachts- & Urlaubsgeld ·
+Gewinnbeteiligung · BAV · VWL · Wellpass · JobRad · 38-Stunden-Vertrag bei
+40 bezahlten Stunden · freitags Feierabend um 12 Uhr · Sommerfest & Wasen ·
+Familien- und Meisterbetrieb seit 1971 · Weiterbildung.
+
+**Bewusst nicht kommuniziert:** Firmenwagen zur Heimnahme (auf Kundenwunsch).
 
 ## Mobile Laufruhe
 

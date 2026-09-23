@@ -35,7 +35,8 @@
   "employmentType": "FULL_TIME",
   "hiringOrganization": { "@type": "Organization", "name": "Stoll Fensterbau GmbH", "sameAs": "https://www.stoll-fensterbau.de/" },
   "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "streetAddress": "Lange Gasse 53", "addressLocality": "Ammerbuch-Pfäffingen", "postalCode": "72119", "addressRegion": "BW", "addressCountry": "DE" } },
-  "qualifications": "Abgeschlossene Ausbildung im Handwerk (z. B. Glaser, Schreiner, Metallbauer, Fensterbauer) oder mehrjährige Erfahrung in der Fenster- und Türenmontage. Führerschein Klasse B.",
+  "jobBenefits": "Übertarifliche, leistungsgerechte Bezahlung, 14 € Spesen netto pro Arbeitstag, 50 € netto extra im Monat, Anwesenheitsprämie, Weihnachts- und Urlaubsgeld, Gewinnbeteiligung, betriebliche Altersvorsorge, vermögenswirksame Leistungen, Wellpass, JobRad, 38-Stunden-Vertrag bei 40 bezahlten Stunden, freitags Feierabend um 12 Uhr, Sommerfest und Wasen.",
+  "qualifications": "Abgeschlossene Ausbildung im Handwerk (z. B. Glaser, Schreiner, Metallbauer, Fensterbauer) oder mehrjährige Erfahrung in der Fenster- und Türenmontage. Führerschein Klasse B. Staplerschein von Vorteil.",
   "url": "https://www.stoll-fensterbau.de/karriere/",
   "directApply": true
 }
@@ -175,6 +176,9 @@ section[id],.form-card{scroll-margin-top:80px}
 .benefit__ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--brand-soft);border:1px solid var(--line-strong);margin-bottom:14px}
 .benefit__ic svg{width:23px;height:23px;stroke:var(--brand-700)}
 .benefit b{font-family:var(--f-display);font-weight:700;font-size:16.5px;display:block;margin-bottom:6px;color:var(--brand-900)}
+.benefit--wide{grid-column:1/-1;background:var(--brand-soft);border-color:var(--line-strong)}
+.benefit--wide .benefit__ic{background:#fff}
+.benefit--wide p{max-width:760px}
 .benefit p{font-size:14px;color:var(--ink-soft);font-weight:500}
 
 /* ---------- process ---------- */
@@ -386,7 +390,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
         </div>
         <span class="hero__eyebrow"><span class="dot"></span>Ammerbuch-Pfäffingen · Wir stellen ein</span>
         <h1 id="heroTitle">Fensterbauer (m/w/d) gesucht</h1>
-        <p class="hero__sub" id="heroSub">Familien- und Meisterbetrieb seit 1971. Unbefristet, modernes Werkzeug, echtes Team. Bewirb dich in unter 60&nbsp;Sekunden – ohne Anschreiben und ohne Lebenslauf.</p>
+        <p class="hero__sub" id="heroSub">Übertariflich bezahlt, 14&nbsp;€ Spesen netto am Tag, freitags um 12&nbsp;Uhr Feierabend. Bewirb dich in unter 60&nbsp;Sekunden – ohne Anschreiben und ohne Lebenslauf.</p>
         <div class="hero__cta">
           <a class="btn btn--white" href="#formular" data-scroll="form">Jetzt bewerben
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -459,14 +463,31 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
   <div class="shell">
     <span class="kicker">Warum Stoll</span>
     <h2 class="sec-title">Ein Betrieb, der sein Handwerk seit über 50 Jahren versteht.</h2>
-    <p class="sec-lead">1971 von Glasermeister Friedrich Stoll gegründet, seit 1996 von Norbert Stoll geführt – und mit Robin Stoll steht die nächste Generation schon bereit. Vom klassischen Fensterbau bis zur modernen Glasarchitektur: Bei uns ist Handwerk kein Schlagwort.</p>
+    <p class="sec-lead">1971 von Glasermeister Friedrich Stoll gegründet, seit 1996 von Norbert Stoll geführt – und mit Robin Stoll steht die nächste Generation schon bereit. Gute Leute sind rar, deshalb legen wir bei den Konditionen nach:</p>
     <div class="benefit-grid">
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></div><b>Sicherer Arbeitsplatz</b><p>Familienbetrieb mit über 50 Jahren Erfahrung. Hier wird nicht von Quartal zu Quartal geplant.</p></div>
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg></div><b>Attraktive Vergütung</b><p>Leistungsgerechte Bezahlung plus Zusatzleistungen – pünktlich, fair, nachvollziehbar.</p></div>
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><b>Moderne Technik</b><p>Hochwertige Materialien und neuestes Werkzeug – vom Holz-Alu-Fenster bis zur Smarthome-Steuerung.</p></div>
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><b>Top Team</b><p>Gutes Betriebsklima, Zusammenhalt und Respekt im Umgang. Kurze Wege statt Konzern-Theater.</p></div>
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></div><b>Weiterbildung &amp; Aufstieg</b><p>Wir fördern deine Entwicklung gezielt – wer mehr will, bekommt bei uns die Chance dazu.</p></div>
-      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><b>Abwechslung statt Fließband</b><p>Montage, Service und Reparatur bei Kunden in der Region – kein Tag ist wie der andere.</p></div>
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></div><b>Übertariflich &amp; leistungsgerecht</b><p>Dein Lohn liegt über Tarif – und richtet sich danach, was du wirklich kannst.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg></div><b>14 € Spesen – netto, pro Tag</b><p>Für jeden Arbeitstag auf Montage. Das läppert sich Monat für Monat zusammen.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div><b>50 € netto extra im Monat</b><p>Jeden Monat obendrauf – dazu kommt die Anwesenheitsprämie.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></div><b>Weihnachts- &amp; Urlaubsgeld</b><p>Zweimal im Jahr extra aufs Konto – plus Gewinnbeteiligung am Erfolg des Betriebs.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10V2"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m16 6-4 4-4-4"/><path d="M16 18a4 4 0 0 0-8 0"/></svg></div><b>Freitags um 12 Uhr Feierabend</b><p>Bei uns fängt das Wochenende schon mittags an – jede Woche.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><b>38 Stunden Vertrag, 40 bezahlt</b><p>Die zwei Stunden pro Woche gehen als bezahlte Überstunden auf dein Konto.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l.77.78L12 20.6l7.65-7.59.77-.78a5.4 5.4 0 0 0 0-7.65z"/><path d="M3.5 12h4l1.5-3 2 6 1.5-3h4"/></svg></div><b>Wellpass</b><p>Firmenfitness: trainieren, schwimmen, saunieren – in tausenden Partner-Studios.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></div><b>JobRad</b><p>Dein Wunschrad per Gehaltsumwandlung – für den Weg zur Arbeit und privat.</p></div>
+
+      <div class="benefit reveal"><div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M9 21V10"/><path d="M15 21V10"/><path d="M19 21V10"/><path d="m2 10 10-7 10 7"/></svg></div><b>BAV &amp; VWL</b><p>Betriebliche Altersvorsorge und vermögenswirksame Leistungen – wir denken an später mit.</p></div>
+
+      <div class="benefit benefit--wide reveal">
+        <div class="benefit__ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <b>Sommerfest, Wasen &amp; ein Team, das zusammenhält</b>
+        <p>Familien- und Meisterbetrieb seit 1971 in zweiter Generation: kurze Wege, hochwertige Materialien, moderne Technik – und Weiterbildung, wenn du mehr willst. Gefeiert wird zusammen, vom Sommerfest bis zum Wasen.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -527,7 +548,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
         <div class="fstep is-active" data-step="1" data-kat="pflicht" data-field="qualifikation">
           <span class="cat cat--pflicht">Pflichtangabe</span>
           <h3>Welche Qualifikation bringst du mit?</h3>
-          <p class="hint">Sei einfach ehrlich – wir suchen Leute, die ihr Handwerk können.</p>
+          <p class="hint">Erfahrung in der Montage zählt bei uns am meisten – sei einfach ehrlich.</p>
           <div class="choice-grid">
             <label class="choice"><input type="radio" name="qualifikation" value="Abgeschlossene Ausbildung im Handwerk + mehrjährige Montageerfahrung" /><span class="key">A</span><span>Ausbildung im Handwerk <small>+ mehrjährige Montageerfahrung</small></span></label>
             <label class="choice"><input type="radio" name="qualifikation" value="Abgeschlossene Ausbildung im Handwerk (z. B. Glaser, Schreiner, Metallbauer)" /><span class="key">B</span><span>Ausbildung im Handwerk <small>Glaser, Schreiner, Metallbauer</small></span></label>
@@ -562,14 +583,14 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
         </div>
 
         <!-- STEP 4 · OPTIONAL -->
-        <div class="fstep" data-step="4" data-kat="optional" data-field="smarthome">
+        <div class="fstep" data-step="4" data-kat="optional" data-field="staplerschein">
           <span class="cat cat--optional">Wünschenswert</span>
-          <h3>Erfahrung mit Smarthome-Technik?</h3>
-          <p class="hint">Kein Muss – wir arbeiten dich ein.</p>
+          <h3>Hast du einen Staplerschein?</h3>
+          <p class="hint">Kein Muss – von Vorteil ist er aber.</p>
           <div class="choice-grid">
-            <label class="choice"><input type="radio" name="smarthome" value="Ja, regelmäßig damit gearbeitet (z. B. Somfy, Motorschlösser, Rollladensteuerung)" /><span class="key">A</span><span>Ja, regelmäßig <small>Somfy, Motorschloss, Rollladen</small></span></label>
-            <label class="choice"><input type="radio" name="smarthome" value="Etwas Berührung damit gehabt" /><span class="key">B</span><span>Etwas Berührung damit gehabt</span></label>
-            <label class="choice"><input type="radio" name="smarthome" value="Nein, bisher keine Erfahrung – aber Lust darauf" /><span class="key">C</span><span>Noch nicht <small>aber ich hab Lust darauf</small></span></label>
+            <label class="choice"><input type="radio" name="staplerschein" value="Ja, Staplerschein vorhanden" /><span class="key">A</span><span>Ja, hab ich</span></label>
+            <label class="choice"><input type="radio" name="staplerschein" value="Nein, aber ich würde ihn machen" /><span class="key">B</span><span>Nein <small>aber ich würde ihn machen</small></span></label>
+            <label class="choice"><input type="radio" name="staplerschein" value="Nein" /><span class="key">C</span><span>Nein</span></label>
           </div>
         </div>
 
@@ -653,7 +674,8 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     </div>
     <div class="faq">
       <details><summary>Brauche ich einen Lebenslauf?</summary><div class="faq__a">Nein. Für die Bewerbung reichen die Angaben im Formular. Wenn du magst, kannst du deinen Lebenslauf oder Zeugnisse im letzten Schritt optional hochladen (PDF, Word oder Foto) – Pflicht ist das nicht.</div></details>
-      <details><summary>Welche Voraussetzungen sollte ich mitbringen?</summary><div class="faq__a">Wichtig sind eine abgeschlossene Ausbildung im Handwerk (z.&nbsp;B. Glaser, Schreiner, Metallbauer) oder einschlägige Erfahrung in der Fenster- und Türenmontage, ein Führerschein der Klasse B sowie Zuverlässigkeit und Teamgeist. Erfahrung mit Smarthome-Technik ist ein Plus, aber kein Muss.</div></details>
+      <details><summary>Welche Voraussetzungen sollte ich mitbringen?</summary><div class="faq__a">Wichtig sind eine abgeschlossene Ausbildung im Handwerk (z.&nbsp;B. Glaser, Schreiner, Metallbauer) oder einschlägige Erfahrung in der Fenster- und Türenmontage, ein Führerschein der Klasse B sowie Zuverlässigkeit und Teamgeist. Am meisten zählt für uns die Erfahrung in der Montage. Ein Staplerschein ist von Vorteil, aber kein Muss.</div></details>
+      <details><summary>Wie sind die Arbeitszeiten?</summary><div class="faq__a">38 Stunden laut Vertrag – bezahlt werden 40. Die zwei Überstunden pro Woche sind also vergütet. Freitags ist um 12&nbsp;Uhr Feierabend.</div></details>
       <details><summary>Wie schnell bekomme ich eine Rückmeldung?</summary><div class="faq__a">Wir melden uns persönlich und schnell – in der Regel telefonisch für ein kurzes, lockeres Erstgespräch.</div></details>
       <details><summary>Ist die Stelle befristet?</summary><div class="faq__a">Nein. Es handelt sich um eine unbefristete Festanstellung in Vollzeit am Standort Ammerbuch-Pfäffingen.</div></details>
       <details><summary>Muss ich viel auf Montage?</summary><div class="faq__a">Unsere Kunden sitzen in der Region rund um Ammerbuch, Tübingen und Herrenberg. Montage, Service und Reparatur finden vor Ort beim Kunden statt – Montagewochen quer durch Deutschland gibt es bei uns nicht.</div></details>
@@ -732,9 +754,8 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     deutsch:        { kat:"pflicht",  label:"Deutschkenntnisse",
                       ko:["Kaum oder keine Deutschkenntnisse"],
                       koText:"Für diese Stelle passt es aktuell leider noch nicht – du bist täglich beim Kunden vor Ort, dafür brauchst du mindestens einfache Deutschkenntnisse." },
-    smarthome:      { kat:"optional", label:"Smarthome-/Technikerfahrung",
-                      erfuellt:["Ja, regelmäßig damit gearbeitet (z. B. Somfy, Motorschlösser, Rollladensteuerung)",
-                                "Etwas Berührung damit gehabt"] },
+    staplerschein:  { kat:"optional", label:"Staplerschein",
+                      erfuellt:["Ja, Staplerschein vorhanden"] },
     verfuegbarkeit: { kat:"optional", label:"Verfügbarkeit",
                       erfuellt:["Sofort","Innerhalb von 1–3 Monaten"] }
   };
@@ -954,7 +975,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       wunsch.push(cfg.label+": "+(ok?"erfüllt":"nicht erfüllt"));
       return v+" (Wunschkriterium "+(ok?"erfüllt":"NICHT erfüllt")+")";
     }
-    var smarthome=optional("smarthome");
+    var staplerschein=optional("staplerschein");
     var verfuegbarkeit=optional("verfuegbarkeit");
 
     return {
@@ -963,7 +984,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       qualifikation:STELLE_SHORT+" · "+val("qualifikation"),
       fuehrerschein:val("fuehrerschein"),
       deutsch:val("deutsch"),
-      smarthome:smarthome,
+      staplerschein:staplerschein,
       verfuegbarkeit:verfuegbarkeit,
       wunschkriterien:wunsch.join(" · "),
       datum:heute(),
