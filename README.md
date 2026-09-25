@@ -1,7 +1,7 @@
 # Stoll Fensterbau – Karriereseite
 
 Recruiting-Landingpage für die **Stoll Fensterbau GmbH** (Ammerbuch-Pfäffingen).
-Offene Stelle: **Fensterbauer (m/w/d)**.
+Offene Stelle: **Fensterbauer / Monteur (m/w/d)**.
 
 ## Inhalt
 
@@ -12,16 +12,9 @@ Offene Stelle: **Fensterbauer (m/w/d)**.
 
 ## ⚠️ Vor dem Live-Gang zu erledigen
 
-1. **LeadTable-Webhook eintragen.** In `index.html` ganz oben im `<script>`-Block:
-   ```js
-   var WEBHOOK_URL   = "";   // ← hier die LeadTable-Webhook-URL einsetzen
-   ```
-   Solange das Feld leer ist, wird **keine** Bewerbung versendet – der Bewerber
-   sieht stattdessen den Fehlerhinweis mit der E-Mail-Adresse.
-2. **Supabase-Bucket anlegen** – `supabase-bewerbungen.sql` einmal im
+1. **Supabase-Bucket anlegen** – `supabase-bewerbungen.sql` einmal im
    Supabase-SQL-Editor ausführen (sonst schlägt der optionale CV-Upload fehl).
-3. **Bildmaterial hochladen** – siehe `bilder/HIER-BILDER-ABLEGEN.txt`.
-4. **Datenschutz-Link prüfen** – aktuell verlinkt auf
+2. **Datenschutz-Link prüfen** – aktuell verlinkt auf
    `https://www.stoll-fensterbau.de/datenschutz/`. Falls der Slug anders heißt,
    an zwei Stellen in `index.html` anpassen (Consent-Text + Footer).
 
@@ -68,9 +61,9 @@ Sechs Schritte: fünf Screening-Fragen (je eine pro Schritt) plus Kontaktdaten.
 
 | # | Frage | Kategorie | K.-o. bei |
 |---|---|---|---|
-| 1 | Qualifikation / Ausbildung | **Pflicht** | „Weder noch“ |
-| 2 | Führerschein Klasse B | **Pflicht** | „Nein, keinen Führerschein“ |
-| 3 | Deutschkenntnisse (Kundenkontakt) | **Pflicht** | „Kaum / keine“ |
+| 1 | Montageerfahrung | **Pflicht** | „Noch keine“ |
+| 2 | Deutschkenntnisse (Kundenkontakt) | **Pflicht** | „Kaum / keine“ |
+| 3 | Führerschein Klasse B | optional | – |
 | 4 | Staplerschein | optional | – |
 | 5 | Verfügbarkeit | optional | – |
 
@@ -104,8 +97,9 @@ Beim Wechsel von Frage zu Frage bleibt der Viewport **exakt stehen**:
 - kein `window.scrollTo`, kein `scrollIntoView`, kein automatisches `focus()`,
   kein Reload, kein Anker-/Hash-Sprung beim Schrittwechsel
 - die Höhe des Fragenbereichs wird per JS auf den höchsten Frage-Schritt fixiert
-  (`lockHeight()`), Fortschrittsanzeige und Weiter-Button bleiben dadurch an
-  derselben Position
+  (`lockHeight()`, fraktionale Messung mit Aufrunden), Fortschrittsanzeige und
+  Weiter-Button bleiben dadurch exakt an derselben Position – gemessen 0,000 px
+  Abweichung über alle fünf Fragen
 - neu gemessen wird nur bei echter Breitenänderung – das Ein-/Ausblenden der
   mobilen Adressleiste löst also keine Sprünge aus
 - ein kompletter Frage-Schritt ist auf Standard-Handydisplays ohne Scrollen
@@ -113,9 +107,11 @@ Beim Wechsel von Frage zu Frage bleibt der Viewport **exakt stehen**:
 
 ## Felder im Webhook-Payload
 
-`vorname`, `nachname`, `email`, `telefon`, `stelle`, `qualifikation`,
-`fuehrerschein`, `deutsch`, `smarthome`, `verfuegbarkeit`, `wunschkriterien`,
-`datum`, `lebenslauf`, `datenschutz`, `quelle`, `seite`
+`vorname`, `nachname`, `email`, `telefon`, `stelle`, `montageerfahrung`,
+`deutsch`, `fuehrerschein`, `staplerschein`, `verfuegbarkeit`,
+`wunschkriterien`, `datum`, `lebenslauf`, `datenschutz`, `quelle`, `seite`
+
+Der Webhook der LeadTable-Kachel ist in `index.html` in `WEBHOOK_URL` hinterlegt.
 
 ## Live schalten (GitHub Pages)
 
