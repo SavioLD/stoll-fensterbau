@@ -7,6 +7,7 @@ Offene Stelle: **Fensterbauer / Monteur (m/w/d)**.
 
 - `index.html` – die komplette Seite (self-contained, keine Build-Schritte nötig)
 - `bilder/` – hier kommen Logo und Fotos hinein (siehe `bilder/HIER-BILDER-ABLEGEN.txt`)
+- `social/` – Facebook-Profilbild, -Titelbild und Bio (siehe `social/README.md`)
 - `.nojekyll` – sorgt dafür, dass GitHub Pages die Dateien 1:1 ausliefert
 
 ## ⚠️ Vor dem Live-Gang zu erledigen
