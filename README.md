@@ -6,14 +6,15 @@ Offene Stelle: **Fensterbauer / Monteur (m/w/d)**.
 ## Inhalt
 
 - `index.html` – die komplette Seite (self-contained, keine Build-Schritte nötig)
-- `supabase-bewerbungen.sql` – legt den Storage-Bucket für den optionalen Lebenslauf-Upload an
 - `bilder/` – hier kommen Logo und Fotos hinein (siehe `bilder/HIER-BILDER-ABLEGEN.txt`)
 - `.nojekyll` – sorgt dafür, dass GitHub Pages die Dateien 1:1 ausliefert
 
 ## ⚠️ Vor dem Live-Gang zu erledigen
 
-1. **Supabase-Bucket anlegen** – `supabase-bewerbungen.sql` einmal im
-   Supabase-SQL-Editor ausführen (sonst schlägt der optionale CV-Upload fehl).
+1. **Web3Forms-Empfängeradresse setzen** – im Web3Forms-Dashboard zum Access-Key
+   `eccb3a4e-…` hinterlegen. Dorthin gehen die Bewerbungen mit angehängtem
+   Lebenslauf. **Dateianhänge sind ein PRO-Feature** – ohne aktives Abo kommt
+   die Mail zwar an, der Anhang aber nicht.
 2. **Datenschutz-Link prüfen** – aktuell verlinkt auf
    `https://www.stoll-fensterbau.de/datenschutz/`. Falls der Slug anders heißt,
    an zwei Stellen in `index.html` anpassen (Consent-Text + Footer).
@@ -112,6 +113,25 @@ Beim Wechsel von Frage zu Frage bleibt der Viewport **exakt stehen**:
 `wunschkriterien`, `datum`, `lebenslauf`, `datenschutz`, `quelle`, `seite`
 
 Der Webhook der LeadTable-Kachel ist in `index.html` in `WEBHOOK_URL` hinterlegt.
+
+## Lebenslauf-Upload (Web3Forms)
+
+Der Upload im letzten Schritt ist optional und läuft über **Web3Forms**
+(`WEB3FORMS_KEY` in `index.html`): eine Datei bis **5 MB**, PDF/Word/JPG/PNG/WebP.
+Web3Forms verschickt die komplette Bewerbung samt Anhang per E-Mail; die
+Empfängeradresse steht im Web3Forms-Dashboard, nicht im Code.
+
+Der Upload kann die Bewerbung **nie blockieren**. Das Feld `lebenslauf` im
+LeadTable-Datensatz sagt, was passiert ist:
+
+| Wert | Bedeutung |
+|---|---|
+| `per E-Mail zugestellt (dateiname.pdf)` | Anhang ist raus |
+| `Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen` | Web3Forms nicht erreichbar, Bewerbung ist trotzdem da |
+| `nicht hochgeladen` | Bewerber hat keine Datei angehängt |
+
+Ist `WEB3FORMS_KEY` leer, wird das Upload-Feld gar nicht erst angezeigt und die
+Bewerbung läuft ganz normal ohne Datei.
 
 ## Live schalten (GitHub Pages)
 

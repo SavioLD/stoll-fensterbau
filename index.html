@@ -17,7 +17,7 @@
 <meta property="og:locale" content="de_DE" />
 <meta property="og:site_name" content="Stoll Fensterbau GmbH" />
 <meta property="og:title" content="Karriere bei Stoll Fensterbau – Fensterbauer / Monteur (m/w/d) in Ammerbuch" />
-<meta property="og:description" content="Familien- und Meisterbetrieb seit 1971. Unbefristet, Vollzeit, moderne Technik, starkes Team. Jetzt bewerben – Lebenslauf optional." />
+<meta property="og:description" content="Familien- und Meisterbetrieb seit 1971. Unbefristet, Vollzeit, moderne Technik, starkes Team. Jetzt bewerben – ohne Anschreiben und ohne Lebenslauf." />
 <meta property="og:url" content="https://www.stoll-fensterbau.de/karriere/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -618,11 +618,11 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
           </div>
           <div class="field"><label for="telefon">Telefonnummer *</label><input id="telefon" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="z. B. 0151 23456789" required /></div>
           <div class="field"><label for="email">E-Mail *</label><input id="email" name="email" type="email" autocomplete="email" placeholder="z. B. max@beispiel.de" required /></div>
-          <div class="field">
+          <div class="field" id="cvField" hidden>
             <label for="lebenslauf">Lebenslauf/Zeugnisse (keine Pflicht)</label>
             <label class="upload" id="uploadBox" for="lebenslauf">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
-              <span id="uploadLabel">Klicken oder Datei hierher ziehen (PDF, Word, Foto · max. 10&nbsp;MB)</span>
+              <span id="uploadLabel">Klicken oder Datei hierher ziehen (PDF, Word, Foto · max. 5&nbsp;MB)</span>
               <button type="button" class="upload__remove" id="uploadRemove" hidden aria-label="Datei entfernen">×</button>
               <input id="lebenslauf" name="lebenslauf" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx,application/pdf,image/jpeg,image/png,image/webp,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
             </label>
@@ -675,7 +675,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       <h2 class="sec-title" style="margin:0 auto">Kurz &amp; knapp beantwortet</h2>
     </div>
     <div class="faq">
-      <details><summary>Brauche ich einen Lebenslauf?</summary><div class="faq__a">Nein. Für die Bewerbung reichen die Angaben im Formular. Wenn du magst, kannst du deinen Lebenslauf oder Zeugnisse im letzten Schritt optional hochladen (PDF, Word oder Foto) – Pflicht ist das nicht.</div></details>
+      <details><summary>Brauche ich einen Lebenslauf?</summary><div class="faq__a">Nein. Für die Bewerbung reichen die Angaben im Formular. Wenn du magst, kannst du deinen Lebenslauf oder deine Zeugnisse im letzten Schritt optional anhängen (PDF, Word oder Foto, max. 5&nbsp;MB) – Pflicht ist das nicht.</div></details>
       <details><summary>Welche Voraussetzungen sollte ich mitbringen?</summary><div class="faq__a">Zwei Dinge sind uns wichtig: Erfahrung in der Fenster- und Türenmontage und eine gute Verständigung auf Deutsch, weil du täglich beim Kunden vor Ort bist. Eine abgeschlossene Ausbildung im Handwerk (z.&nbsp;B. Glaser, Schreiner, Metallbauer), ein Führerschein der Klasse&nbsp;B und ein Staplerschein sind von Vorteil, aber kein Muss.</div></details>
       <details><summary>Wie sind die Arbeitszeiten?</summary><div class="faq__a">38 Stunden laut Vertrag – bezahlt werden 40. Die zwei Überstunden pro Woche sind also vergütet. Freitags ist um 12&nbsp;Uhr Feierabend.</div></details>
       <details><summary>Wie schnell bekomme ich eine Rückmeldung?</summary><div class="faq__a">Wir melden uns persönlich und schnell – in der Regel telefonisch für ein kurzes, lockeres Erstgespräch.</div></details>
@@ -728,10 +728,15 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
      Bewerbung versendet und der Bewerber sieht den Fehlerhinweis. */
   var WEBHOOK_URL   = "https://api-v2.lead-table.com/api/webhook/generic/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0YWJsZUlEIjoiNmFiNDE5Yjg1Y2E1YTExODNlYzY4NDUzIiwiY3VzdG9tZXJJRCI6IjZhYjNlZTRjN2MxMzAzYjQyZTRiMjZjYSIsImFnZW5jeUlEIjoiNjliZDc3NzVlNGQxN2IzOGVkNjUzZDE2IiwiaWF0IjoxNzkwMTg3OTYwfQ.7WLBTFI-2-Hc91_wK-pYbZRMccxMSa6aaxMuNtgs2gg";
 
-  var SUPABASE_URL  = "https://kxqdybjkcrowqdcpvlqa.supabase.co";
-  var SUPABASE_KEY  = "sb_publishable_HRuh5O03dI84U_OngeWfRg_GwKnWkYp";
-  var UPLOAD_BUCKET = "bewerbungen-stoll";
-  var UPLOAD_MAX    = 10 * 1024 * 1024;
+  /* Web3Forms – zustaendig nur fuer den optionalen Lebenslauf-Upload:
+     schickt die Bewerbung samt Datei per E-Mail. Die Empfaengeradresse wird
+     im Web3Forms-Dashboard hinterlegt, nicht hier. Dateianhaenge sind ein
+     PRO-Feature, eine Datei bis 5 MB.
+     Ist der Key leer, wird das Upload-Feld nicht angezeigt und die Bewerbung
+     laeuft ganz normal ohne Datei in die LeadTable. */
+  var WEB3FORMS_KEY = "eccb3a4e-1f69-4278-a13f-a42fd9477e19";
+  var WEB3FORMS_URL = "https://api.web3forms.com/submit";
+  var UPLOAD_MAX    = 5 * 1024 * 1024;
   var UPLOAD_TYPES  = ["application/pdf","image/jpeg","image/png","image/webp","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
 
   var STELLE = "Fensterbauer / Monteur (m/w/d)";
@@ -934,32 +939,49 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     btn.addEventListener("click", function(){ cardEl.scrollIntoView({behavior:"smooth",block:"start"}); });
   });
 
-  /* Upload */
-  var fileInput=document.getElementById("lebenslauf"), uploadBox=document.getElementById("uploadBox"), uploadLabel=document.getElementById("uploadLabel"),
-      uploadRemove=document.getElementById("uploadRemove"), uploadError=document.getElementById("uploadError"), uploadDefaultText=uploadLabel.textContent, cvFile=null;
-  function setUploadError(m){ uploadError.textContent=m||""; uploadError.classList.toggle("is-visible", !!m); }
-  function acceptFile(file){
-    setUploadError(""); if(!file) return;
-    if (UPLOAD_TYPES.indexOf(file.type)===-1){ setUploadError("Bitte nur PDF, Word oder Foto (JPG/PNG) hochladen."); return; }
-    if (file.size>UPLOAD_MAX){ setUploadError("Die Datei ist größer als 10 MB. Bitte eine kleinere Datei wählen."); return; }
-    cvFile=file; uploadBox.classList.add("has-file");
-    uploadLabel.textContent=file.name+" ("+(file.size/1024/1024).toFixed(1).replace(".",",")+" MB)"; uploadRemove.hidden=false;
-  }
-  function clearFile(){ cvFile=null; fileInput.value=""; uploadBox.classList.remove("has-file"); uploadLabel.textContent=uploadDefaultText; uploadRemove.hidden=true; setUploadError(""); }
-  fileInput.addEventListener("change", function(){ acceptFile(fileInput.files[0]); });
-  uploadRemove.addEventListener("click", function(ev){ ev.preventDefault(); ev.stopPropagation(); clearFile(); });
-  ["dragover","dragenter"].forEach(function(t){ uploadBox.addEventListener(t, function(ev){ ev.preventDefault(); uploadBox.classList.add("is-drag"); }); });
-  ["dragleave","drop"].forEach(function(t){ uploadBox.addEventListener(t, function(ev){ ev.preventDefault(); uploadBox.classList.remove("is-drag"); }); });
-  uploadBox.addEventListener("drop", function(ev){ if(ev.dataTransfer&&ev.dataTransfer.files&&ev.dataTransfer.files[0]) acceptFile(ev.dataTransfer.files[0]); });
-  function uploadCv(){
-    if(!cvFile) return Promise.resolve("");
-    var uuid=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10));
-    var safeName=cvFile.name.replace(/[^a-zA-Z0-9._-]+/g,"_").slice(-80), path=uuid+"/"+safeName;
-    function attempt(){
-      return fetch(SUPABASE_URL+"/storage/v1/object/"+UPLOAD_BUCKET+"/"+path, { method:"POST", headers:{ "apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":cvFile.type,"x-upsert":"false" }, body:cvFile })
-        .then(function(res){ if(!res.ok) throw new Error("HTTP "+res.status); return SUPABASE_URL+"/storage/v1/object/public/"+UPLOAD_BUCKET+"/"+path; });
+  /* ---------- Optionaler Lebenslauf-Upload (Web3Forms) ---------- */
+  var cvFile=null, cvField=document.getElementById("cvField");
+  var fileInput=document.getElementById("lebenslauf"), uploadBox=document.getElementById("uploadBox"),
+      uploadLabel=document.getElementById("uploadLabel"), uploadRemove=document.getElementById("uploadRemove"),
+      uploadError=document.getElementById("uploadError"), uploadDefaultText=uploadLabel.textContent;
+
+  if (WEB3FORMS_KEY){
+    cvField.hidden=false;
+    function setUploadError(m){ uploadError.textContent=m||""; uploadError.classList.toggle("is-visible", !!m); }
+    function acceptFile(file){
+      setUploadError(""); if(!file) return;
+      if (UPLOAD_TYPES.indexOf(file.type)===-1){ setUploadError("Bitte nur PDF, Word oder Foto (JPG/PNG) hochladen."); return; }
+      if (file.size>UPLOAD_MAX){ setUploadError("Die Datei ist größer als 5 MB. Bitte eine kleinere Datei wählen."); return; }
+      cvFile=file; uploadBox.classList.add("has-file");
+      uploadLabel.textContent=file.name+" ("+(file.size/1024/1024).toFixed(1).replace(".",",")+" MB)"; uploadRemove.hidden=false;
     }
-    return attempt().catch(function(){ return attempt().catch(function(){ var e=new Error("upload_failed"); e.isUploadError=true; throw e; }); });
+    function clearFile(){ cvFile=null; fileInput.value=""; uploadBox.classList.remove("has-file"); uploadLabel.textContent=uploadDefaultText; uploadRemove.hidden=true; setUploadError(""); }
+    fileInput.addEventListener("change", function(){ acceptFile(fileInput.files[0]); });
+    uploadRemove.addEventListener("click", function(ev){ ev.preventDefault(); ev.stopPropagation(); clearFile(); });
+    ["dragover","dragenter"].forEach(function(t){ uploadBox.addEventListener(t, function(ev){ ev.preventDefault(); uploadBox.classList.add("is-drag"); }); });
+    ["dragleave","drop"].forEach(function(t){ uploadBox.addEventListener(t, function(ev){ ev.preventDefault(); uploadBox.classList.remove("is-drag"); }); });
+    uploadBox.addEventListener("drop", function(ev){ if(ev.dataTransfer&&ev.dataTransfer.files&&ev.dataTransfer.files[0]) acceptFile(ev.dataTransfer.files[0]); });
+  } else {
+    console.warn("[Stoll Karriereseite] WEB3FORMS_KEY ist nicht hinterlegt – der Lebenslauf-Upload ist ausgeblendet. Bewerbungen laufen normal in die LeadTable.");
+  }
+
+  /* Schickt Bewerbung + Datei per Web3Forms als E-Mail raus.
+     Gibt immer ein Ergebnis zurueck und wirft nie – ein fehlgeschlagener
+     Upload darf die Bewerbung niemals blockieren. */
+  function sendCv(data){
+    if (!cvFile || !WEB3FORMS_KEY) return Promise.resolve("nicht hochgeladen");
+    var fd=new FormData();
+    fd.append("access_key", WEB3FORMS_KEY);
+    fd.append("subject", "Neue Bewerbung: "+STELLE+" – "+data.vorname+" "+data.nachname);
+    fd.append("from_name", "Karriereseite Stoll Fensterbau");
+    fd.append("replyto", data.email);
+    Object.keys(data).forEach(function(k){ if (k!=="lebenslauf") fd.append(k, data[k]); });
+    fd.append("lebenslauf", cvFile, cvFile.name);
+    /* Content-Type bewusst nicht setzen – der Browser ergaenzt die Multipart-Boundary. */
+    return fetch(WEB3FORMS_URL, { method:"POST", body:fd })
+      .then(function(res){ return res.ok ? "per E-Mail zugestellt ("+cvFile.name+")"
+                                         : "Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen"; })
+      .catch(function(){ return "Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen"; });
   }
 
   function heute(){ var d=new Date(); return ("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear(); }
@@ -990,7 +1012,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       verfuegbarkeit:verfuegbarkeit,
       wunschkriterien:wunsch.join(" · "),
       datum:heute(),
-      lebenslauf:"",
+      lebenslauf:"nicht hochgeladen",
       datenschutz:"Ja (Einwilligung mit Absenden, Art. 6 Abs. 1 lit. a DSGVO)",
       quelle:"Karriere-Landingpage Stoll Fensterbau",
       seite:location.href
@@ -1004,17 +1026,23 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       errBox.classList.add("is-visible");
       return;
     }
-    submitting=true; btnNext.disabled=true; btnNext.textContent=cvFile?"Lebenslauf wird hochgeladen …":"Wird gesendet …"; errBox.classList.remove("is-visible");
-    uploadCv().then(function(cvUrl){
+    submitting=true; btnNext.disabled=true;
+    btnNext.textContent=cvFile?"Lebenslauf wird gesendet …":"Wird gesendet …";
+    errBox.classList.remove("is-visible");
+    var data=collect();
+    sendCv(data).then(function(cvStatus){
       btnNext.textContent="Wird gesendet …";
-      var data=collect(); data.lebenslauf=cvUrl||"nicht hochgeladen"; var payload=JSON.stringify(data);
+      data.lebenslauf=cvStatus;
+      var payload=JSON.stringify(data);
       return fetch(WEBHOOK_URL,{ method:"POST", headers:{ "Content-Type":"application/json" }, body:payload })
         .then(function(res){ if(!res.ok) throw new Error("HTTP "+res.status); finishSuccess(); })
-        .catch(function(){ return fetch(WEBHOOK_URL,{ method:"POST", mode:"no-cors", headers:{ "Content-Type":"text/plain" }, body:payload }).then(finishSuccess); });
-    }).catch(function(err){
+        .catch(function(){
+          /* Zweiter Versuch ohne Preflight, falls CORS den ersten blockt. */
+          return fetch(WEBHOOK_URL,{ method:"POST", mode:"no-cors", headers:{ "Content-Type":"text/plain" }, body:payload }).then(finishSuccess);
+        });
+    }).catch(function(){
       submitting=false; btnNext.disabled=false; btnNext.textContent="Bewerbung absenden";
-      if (err&&err.isUploadError) setUploadError("Der Upload hat leider nicht geklappt. Bitte versuche es noch einmal – oder entferne die Datei über das × und schicke den Lebenslauf später an info@stoll-fensterbau.de.");
-      else errBox.classList.add("is-visible");
+      errBox.classList.add("is-visible");
     });
   }
 
