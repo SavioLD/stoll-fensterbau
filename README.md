@@ -86,7 +86,7 @@ Kommuniziert werden (Stand Onboarding):
 
 übertarifliche, leistungsgerechte Bezahlung · 14 € Spesen netto pro Arbeitstag ·
 50 € netto extra im Monat · Anwesenheitsprämie · Weihnachts- & Urlaubsgeld ·
-Gewinnbeteiligung · BAV · VWL · Wellpass · JobRad · 38-Stunden-Vertrag bei
+Erfolgsprämie · BAV · VWL · Wellpass · JobRad · 38-Stunden-Vertrag bei
 40 bezahlten Stunden · freitags Feierabend um 12 Uhr · Sommerfest & Wasen ·
 Familien- und Meisterbetrieb seit 1971 · Weiterbildung.
 

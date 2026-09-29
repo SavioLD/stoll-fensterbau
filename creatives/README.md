@@ -6,8 +6,8 @@ in `bilder/`.
 | Konzept | Winkel | Foto |
 |---|---|---|
 | `geld` | Benefits konkret – zieht über Lohn und Arbeitszeit | 9 |
-| `koenner` | Qualitätsfilter – spricht Könner an, schreckt Helfer ab | 27 |
-| `familie` | Sicherheit & Perspektive – Familienbetrieb, Aufstieg | 38 |
+| `koenner` | Qualitätsfilter – setzt Montageerfahrung voraus, ohne abzuwerten | 27 |
+| `familie` | Sicherheit & Perspektive – Familienbetrieb in 3. Generation | 38 |
 
 | Format | Datei | Platzierung |
 |---|---|---|
