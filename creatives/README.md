@@ -8,6 +8,12 @@ in `bilder/`.
 | `geld` | Benefits konkret – zieht über Lohn und Arbeitszeit | 9 |
 | `koenner` | Qualitätsfilter – setzt Montageerfahrung voraus, ohne abzuwerten | 27 |
 | `familie` | Sicherheit & Perspektive – Familienbetrieb in 3. Generation | 38 |
+| `region` | Einsätze vor der Haustür, abends daheim | 4 |
+| `aufstieg` | Weiterbildung & Perspektive im Betrieb | 18 |
+
+Noch offen: Für ein Konzept rund ums Team fehlt ein Gruppenfoto der
+Mannschaft. Mit dem vorhandenen Material lässt sich „Team" nicht glaubhaft
+bebildern, ohne ein bereits belegtes Motiv zu wiederholen.
 
 | Format | Datei | Platzierung |
 |---|---|---|
