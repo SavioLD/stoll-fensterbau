@@ -85,7 +85,8 @@ lassen sich dort anpassen, ohne das Markup anzufassen.
 Kommuniziert werden (Stand Onboarding):
 
 übertarifliche, leistungsgerechte Bezahlung · 14 € Spesen netto pro Arbeitstag ·
-50 € netto extra im Monat · Anwesenheitsprämie · Weihnachts- & Urlaubsgeld ·
+50 € Fahrtkostenzuschuss netto im Monat (alternativ Firmenfahrzeug für den
+Arbeitsweg nach Absprache) · Anwesenheitsprämie · Weihnachts- & Urlaubsgeld ·
 Erfolgsprämie · BAV · VWL · Wellpass · JobRad · 38-Stunden-Vertrag bei
 40 bezahlten Stunden · freitags Feierabend um 12 Uhr · Einsätze nur in der
 Region · freundschaftliches Team · Weiterbildung & Aufstieg · Sommerfest &
