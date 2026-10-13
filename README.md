@@ -134,6 +134,26 @@ exakt diesen Namen: `stelle`, `montageerfahrung`, `deutsch`, `fuehrerschein`,
 
 Der Webhook der LeadTable-Kachel ist in `index.html` in `WEBHOOK_URL` hinterlegt.
 
+## Wo die Bewerbungen landen
+
+Jede abgeschlossene Bewerbung geht an **zwei** Stellen:
+
+1. **Per E-Mail über Web3Forms** – vollständig, mit allen Screening-Antworten
+   und dem Lebenslauf als Anhang, falls einer angehängt wurde. Das ist der
+   verlässliche Kanal.
+2. **An die LeadTable-Kachel** – als Lead-Liste. LeadTable übernimmt aus dem
+   generischen Webhook allerdings nur Name, E-Mail und Telefon; die Antworten
+   auf die Screening-Fragen kommen dort nicht an, obwohl die Seite sie sendet.
+   Deshalb ist die E-Mail der führende Kanal, nicht LeadTable.
+
+Ein Fehler beim Mailversand blockiert die Übertragung an LeadTable nie und
+umgekehrt – der Bewerber sieht in beiden Fällen die Erfolgsmeldung.
+
+Zur Fehlersuche am Webhook liegt `tools/leadtable-test.html` bereit: Die Seite
+schickt Testdatensätze in drei Formaten an denselben Webhook und zeigt
+HTTP-Status und Antwort an. Von der Live-Domain aufrufen, damit CORS sich
+identisch verhält.
+
 ## Lebenslauf-Upload (Web3Forms)
 
 Der Upload im letzten Schritt ist optional und läuft über **Web3Forms**

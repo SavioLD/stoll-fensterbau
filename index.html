@@ -972,23 +972,32 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     console.warn("[Stoll Karriereseite] WEB3FORMS_KEY ist nicht hinterlegt – der Lebenslauf-Upload ist ausgeblendet. Bewerbungen laufen normal in die LeadTable.");
   }
 
-  /* Schickt Bewerbung + Datei per Web3Forms als E-Mail raus.
-     Gibt immer ein Ergebnis zurueck und wirft nie – ein fehlgeschlagener
-     Upload darf die Bewerbung niemals blockieren. */
-  function sendCv(data){
-    if (!cvFile || !WEB3FORMS_KEY) return Promise.resolve("nicht hochgeladen");
+  /* Schickt JEDE Bewerbung komplett per Web3Forms als E-Mail raus – mit Datei,
+     falls eine angehaengt wurde. Das ist der verlaessliche Kanal: LeadTable
+     uebernimmt aus dem generischen Webhook nur Name, E-Mail und Telefon, die
+     Antworten auf die Screening-Fragen kommen dort nicht an. Per Mail hat
+     Stoll jede Bewerbung vollstaendig.
+     Gibt immer ein Ergebnis zurueck und wirft nie – ein Fehler hier darf die
+     Uebertragung an LeadTable niemals blockieren. */
+  function sendBewerbung(data){
+    if (!WEB3FORMS_KEY) return Promise.resolve(cvFile ? "nicht übertragen (kein Mailversand konfiguriert)" : "nicht hochgeladen");
     var fd=new FormData();
     fd.append("access_key", WEB3FORMS_KEY);
     fd.append("subject", "Neue Bewerbung: "+STELLE+" – "+data.vorname+" "+data.nachname);
     fd.append("from_name", "Karriereseite Stoll Fensterbau");
     fd.append("replyto", data.email);
     Object.keys(data).forEach(function(k){ if (k!=="lebenslauf") fd.append(k, data[k]); });
-    fd.append("lebenslauf", cvFile, cvFile.name);
+    if (cvFile) fd.append("lebenslauf", cvFile, cvFile.name);
     /* Content-Type bewusst nicht setzen – der Browser ergaenzt die Multipart-Boundary. */
     return fetch(WEB3FORMS_URL, { method:"POST", body:fd })
-      .then(function(res){ return res.ok ? "per E-Mail zugestellt ("+cvFile.name+")"
-                                         : "Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen"; })
-      .catch(function(){ return "Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen"; });
+      .then(function(res){
+        if (!res.ok) throw new Error("HTTP "+res.status);
+        return cvFile ? "per E-Mail zugestellt ("+cvFile.name+")" : "nicht hochgeladen";
+      })
+      .catch(function(){
+        return cvFile ? "Upload fehlgeschlagen – bitte Unterlagen beim Bewerber anfragen"
+                      : "nicht hochgeladen (Mailversand fehlgeschlagen)";
+      });
   }
 
   function heute(){ var d=new Date(); return ("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear(); }
@@ -1056,10 +1065,10 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       return;
     }
     submitting=true; btnNext.disabled=true;
-    btnNext.textContent=cvFile?"Lebenslauf wird gesendet …":"Wird gesendet …";
+    btnNext.textContent="Wird gesendet …";
     errBox.classList.remove("is-visible");
     var data=collect();
-    sendCv(data).then(function(cvStatus){
+    sendBewerbung(data).then(function(cvStatus){
       btnNext.textContent="Wird gesendet …";
       data.lebenslauf=cvStatus;
       /* Lebenslauf-Status steht erst nach dem Upload fest */
