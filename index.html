@@ -1009,7 +1009,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     var staplerschein=optional("staplerschein");
     var verfuegbarkeit=optional("verfuegbarkeit");
 
-    return {
+    var data = {
       vorname:val("vorname"), nachname:val("nachname"), email:val("email"), telefon:val("telefon"),
       stelle:STELLE,
       montageerfahrung:STELLE_SHORT+" · "+val("montageerfahrung"),
@@ -1024,6 +1024,28 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       quelle:"Karriere-Landingpage Stoll Fensterbau",
       seite:location.href
     };
+
+    /* Zusaetzlich alles als ein zusammenhaengender Text. LeadTable uebernimmt
+       aus dem generischen Webhook nur Felder, fuer die in der Kachel auch eine
+       Spalte existiert - alles andere faellt still weg. Dieser Block landet in
+       den Standardfeldern und ist damit auch dann vollstaendig lesbar, wenn
+       keine eigenen Spalten angelegt sind. */
+    data.zusammenfassung = [
+      "Stelle: "              + data.stelle,
+      "Montageerfahrung: "    + val("montageerfahrung"),
+      "Deutschkenntnisse: "   + data.deutsch,
+      "Führerschein Kl. B: "  + (data.fuehrerschein   || "keine Angabe"),
+      "Staplerschein: "       + (data.staplerschein   || "keine Angabe"),
+      "Verfügbarkeit: "       + (data.verfuegbarkeit  || "keine Angabe"),
+      "Wunschkriterien: "     + (data.wunschkriterien || "–"),
+      "Lebenslauf: "          + data.lebenslauf,
+      "Eingegangen am: "      + data.datum + " über " + data.quelle
+    ].join("\n");
+    data.beschreibung = data.zusammenfassung;
+    data.nachricht    = data.zusammenfassung;
+    data.message      = data.zusammenfassung;
+
+    return data;
   }
 
   function submit(){
@@ -1040,6 +1062,10 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
     sendCv(data).then(function(cvStatus){
       btnNext.textContent="Wird gesendet …";
       data.lebenslauf=cvStatus;
+      /* Lebenslauf-Status steht erst nach dem Upload fest */
+      ["zusammenfassung","beschreibung","nachricht","message"].forEach(function(k){
+        data[k]=data[k].replace(/^Lebenslauf: .*$/m, "Lebenslauf: "+cvStatus);
+      });
       var payload=JSON.stringify(data);
       return fetch(WEBHOOK_URL,{ method:"POST", headers:{ "Content-Type":"application/json" }, body:payload })
         .then(function(res){ if(!res.ok) throw new Error("HTTP "+res.status); finishSuccess(); })

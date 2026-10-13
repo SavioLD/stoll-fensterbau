@@ -118,6 +118,20 @@ Beim Wechsel von Frage zu Frage bleibt der Viewport **exakt stehen**:
 `deutsch`, `fuehrerschein`, `staplerschein`, `verfuegbarkeit`,
 `wunschkriterien`, `datum`, `lebenslauf`, `datenschutz`, `quelle`, `seite`
 
+Dazu `zusammenfassung`, `beschreibung`, `nachricht` und `message` – alle vier
+enthalten denselben mehrzeiligen Klartext mit sämtlichen Antworten.
+
+**Warum doppelt:** LeadTable übernimmt aus dem generischen Webhook nur Felder,
+für die in der Kachel auch eine Spalte existiert. Alles andere fällt still weg –
+dann stehen im Lead nur Name, E-Mail und Telefon. Der Klartextblock landet in
+den Standardfeldern und ist deshalb auch ohne eigene Spalten vollständig lesbar.
+
+Damit die Antworten als **einzelne Spalten** erscheinen, müssen sie in der
+LeadTable-Kachel einmalig über „Neues Feld hinzufügen" angelegt werden, mit
+exakt diesen Namen: `stelle`, `montageerfahrung`, `deutsch`, `fuehrerschein`,
+`staplerschein`, `verfuegbarkeit`, `wunschkriterien`, `lebenslauf`, `datum`,
+`quelle`.
+
 Der Webhook der LeadTable-Kachel ist in `index.html` in `WEBHOOK_URL` hinterlegt.
 
 ## Lebenslauf-Upload (Web3Forms)
