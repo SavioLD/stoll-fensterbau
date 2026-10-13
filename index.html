@@ -1000,6 +1000,43 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       });
   }
 
+  /* ---------------------------------------------------------------------
+     LeadTable uebernimmt aus dem generischen Webhook nur Felder, deren Name
+     exakt einer Spalte der Kachel entspricht - alles andere faellt still weg.
+     Welche Spalten existieren und wie sie genau heissen, ist von aussen nicht
+     sichtbar. In der Oberflaeche stehen sie gross geschrieben ("Name",
+     "E-Mail", "Telefonnummer"), unsere Keys sind klein - gut moeglich, dass
+     der Abgleich die Gross-/Kleinschreibung beachtet.
+     Deshalb geht jede Antwort zusaetzlich unter den gebraeuchlichen
+     Schreibweisen raus. Unbekannte Felder ignoriert LeadTable folgenlos.
+     Sobald die echten Spaltennamen feststehen, kann diese Liste auf genau
+     diese Namen eingedampft werden.
+     Gilt nur fuer LeadTable - die Bewerbungsmail bleibt schlank.
+     --------------------------------------------------------------------- */
+  var LT_ALIASE = {
+    stelle:           ["Stelle","position","Position"],
+    montageerfahrung: ["Montageerfahrung","erfahrung","Erfahrung","berufserfahrung","Berufserfahrung"],
+    deutsch:          ["Deutsch","deutschkenntnisse","Deutschkenntnisse","sprache","Sprache"],
+    fuehrerschein:    ["Fuehrerschein","Führerschein","führerschein"],
+    staplerschein:    ["Staplerschein"],
+    verfuegbarkeit:   ["Verfuegbarkeit","Verfügbarkeit","verfügbarkeit","starttermin","Starttermin"],
+    wunschkriterien:  ["Wunschkriterien"],
+    lebenslauf:       ["Lebenslauf"],
+    datum:            ["Datum"],
+    quelle:           ["Quelle"],
+    zusammenfassung:  ["Zusammenfassung","notiz","Notiz","notizen","Notizen","bemerkung","Bemerkung",
+                       "info","Info","details","Details","kommentar","Kommentar","Beschreibung","Nachricht"]
+  };
+  function mitAliasen(data){
+    var out={}, k;
+    for (k in data) out[k]=data[k];
+    for (k in LT_ALIASE){
+      if (!data[k]) continue;
+      LT_ALIASE[k].forEach(function(alias){ if (!(alias in out)) out[alias]=data[k]; });
+    }
+    return out;
+  }
+
   function heute(){ var d=new Date(); return ("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear(); }
 
   function collect(){
@@ -1075,7 +1112,7 @@ footer{padding:52px 0 36px;background:var(--brand-900);color:#d6eae6}
       ["zusammenfassung","beschreibung","nachricht","message"].forEach(function(k){
         data[k]=data[k].replace(/^Lebenslauf: .*$/m, "Lebenslauf: "+cvStatus);
       });
-      var payload=JSON.stringify(data);
+      var payload=JSON.stringify(mitAliasen(data));
       return fetch(WEBHOOK_URL,{ method:"POST", headers:{ "Content-Type":"application/json" }, body:payload })
         .then(function(res){ if(!res.ok) throw new Error("HTTP "+res.status); finishSuccess(); })
         .catch(function(){
