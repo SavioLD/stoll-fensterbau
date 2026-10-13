@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>LeadTable-Diagnose · Stoll</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f1f6f5;color:#173f3a;padding:28px 18px 80px}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-size:23px;color:#0d3c37;margin-bottom:6px}
+p.lead{color:#3e615b;margin-bottom:22px}
+.card{background:#fff;border:1.5px solid rgba(13,60,55,.15);border-radius:14px;padding:20px;margin-bottom:16px}
+h2{font-size:16px;color:#0a5f57;margin-bottom:4px}
+.hint{font-size:13.5px;color:#6d8f89;margin-bottom:14px}
+button{background:#00796d;color:#fff;border:0;border-radius:9px;padding:12px 20px;font:600 15px/1 inherit;cursor:pointer}
+button:hover{background:#00625a}
+button[disabled]{opacity:.5;cursor:not-allowed}
+.run-all{background:#0d3c37;margin-bottom:18px;padding:14px 24px;font-size:16px}
+pre{background:#0d3c37;color:#cfe9e4;padding:14px;border-radius:9px;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;margin-top:12px;max-height:280px;overflow:auto}
+.ok{color:#5fd6c6;font-weight:700}
+.bad{color:#ff9d9d;font-weight:700}
+code{background:#e2f4f1;padding:2px 6px;border-radius:5px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>LeadTable-Diagnose</h1>
+<p class="lead">Sendet Test-Datensätze an den hinterlegten Webhook und zeigt, was LeadTable antwortet.
+Alle Test-Leads heißen <code>ZZZ TEST</code> – danach bitte in LeadTable löschen.</p>
+
+<button class="run-all" id="all">Alle drei Varianten nacheinander testen</button>
+
+<div class="card">
+  <h2>1 · Flaches JSON</h2>
+  <p class="hint">So sendet die Karriereseite aktuell. <code>Content-Type: application/json</code></p>
+  <button data-run="1">Variante 1 senden</button>
+  <pre id="out1">noch nicht getestet</pre>
+</div>
+
+<div class="card">
+  <h2>2 · JSON unter „data" verschachtelt</h2>
+  <p class="hint">Falls die v2-API einen Umschlag erwartet: <code>{ "data": { … } }</code></p>
+  <button data-run="2">Variante 2 senden</button>
+  <pre id="out2">noch nicht getestet</pre>
+</div>
+
+<div class="card">
+  <h2>3 · Formular-Felder</h2>
+  <p class="hint"><code>application/x-www-form-urlencoded</code> statt JSON – löst keinen CORS-Preflight aus.</p>
+  <button data-run="3">Variante 3 senden</button>
+  <pre id="out3">noch nicht getestet</pre>
+</div>
+
+<div class="card">
+  <h2>Ergebnis</h2>
+  <pre id="fazit">Noch kein Test gelaufen.</pre>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var WEBHOOK_URL = "https://api-v2.lead-table.com/api/webhook/generic/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0YWJsZUlEIjoiNmFiNDE5Yjg1Y2E1YTExODNlYzY4NDUzIiwiY3VzdG9tZXJJRCI6IjZhYjNlZTRjN2MxMzAzYjQyZTRiMjZjYSIsImFnZW5jeUlEIjoiNjliZDc3NzVlNGQxN2IzOGVkNjUzZDE2IiwiaWF0IjoxNzkwMTg3OTYwfQ.7WLBTFI-2-Hc91_wK-pYbZRMccxMSa6aaxMuNtgs2gg";
+
+function payload(n){
+  return {
+    vorname:"ZZZ", nachname:"TEST Variante "+n,
+    email:"test-variante"+n+"@beispiel.de", telefon:"0151 00000"+n,
+    stelle:"Fensterbauer / Monteur (m/w/d)",
+    montageerfahrung:"TESTWERT Montageerfahrung",
+    deutsch:"TESTWERT Deutschkenntnisse",
+    fuehrerschein:"TESTWERT Fuehrerschein",
+    staplerschein:"TESTWERT Staplerschein",
+    verfuegbarkeit:"TESTWERT Verfuegbarkeit",
+    wunschkriterien:"TESTWERT Wunschkriterien",
+    zusammenfassung:"TESTWERT Zusammenfassung Zeile 1\nZeile 2",
+    beschreibung:"TESTWERT Beschreibung",
+    nachricht:"TESTWERT Nachricht",
+    message:"TESTWERT Message",
+    datum:new Date().toLocaleDateString("de-DE"),
+    quelle:"Diagnose-Tool"
+  };
+}
+
+function show(id, lines){ document.getElementById(id).innerHTML = lines.join("\n"); }
+function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+
+var ergebnis = {};
+
+function senden(n){
+  var out="out"+n, body, headers;
+  if (n===1){ body=JSON.stringify(payload(1)); headers={"Content-Type":"application/json"}; }
+  if (n===2){ body=JSON.stringify({data:payload(2)}); headers={"Content-Type":"application/json"}; }
+  if (n===3){
+    var p=payload(3), fd=[];
+    for (var k in p) fd.push(encodeURIComponent(k)+"="+encodeURIComponent(p[k]));
+    body=fd.join("&"); headers={"Content-Type":"application/x-www-form-urlencoded"};
+  }
+  show(out, ["sende …"]);
+  return fetch(WEBHOOK_URL,{method:"POST",headers:headers,body:body})
+    .then(function(res){
+      return res.text().then(function(t){
+        var okay = res.ok;
+        ergebnis[n] = okay ? "HTTP "+res.status : "HTTP "+res.status;
+        show(out, [
+          (okay?"<span class='ok'>✓ Antwort empfangen</span>":"<span class='bad'>✗ Fehlerstatus</span>"),
+          "HTTP-Status : "+res.status+" "+res.statusText,
+          "Antwort     : "+esc(t.slice(0,900) || "(leer)")
+        ]);
+      });
+    })
+    .catch(function(err){
+      ergebnis[n] = "blockiert ("+err.message+")";
+      show(out, [
+        "<span class='bad'>✗ Antwort nicht lesbar</span>",
+        "Grund: "+esc(err.message),
+        "",
+        "Das heißt: Entweder ist der Request gar nicht rausgegangen,",
+        "oder LeadTable erlaubt per CORS kein Auslesen der Antwort.",
+        "Die Karriereseite sendet in diesem Fall blind nochmal (no-cors) –",
+        "ob LeadTable das annimmt, sieht man nur in LeadTable selbst."
+      ]);
+    });
+}
+
+document.querySelectorAll("[data-run]").forEach(function(b){
+  b.addEventListener("click", function(){ senden(+b.getAttribute("data-run")).then(fazit); });
+});
+document.getElementById("all").addEventListener("click", function(){
+  var btn=this; btn.disabled=true;
+  senden(1).then(function(){ return senden(2); }).then(function(){ return senden(3); })
+    .then(function(){ btn.disabled=false; fazit(); });
+});
+
+function fazit(){
+  var l=["Variante 1 (flaches JSON)       : "+(ergebnis[1]||"–"),
+         "Variante 2 (unter data)         : "+(ergebnis[2]||"–"),
+         "Variante 3 (Formular-Felder)    : "+(ergebnis[3]||"–"),
+         "",
+         "Jetzt in LeadTable nachsehen, welche der drei Varianten",
+         "als Lead angekommen ist und welche Felder dort gefüllt sind.",
+         "Danach alle ZZZ-TEST-Leads löschen."];
+  show("fazit", l);
+}
+})();
+</script>
+</body>
+</html>
